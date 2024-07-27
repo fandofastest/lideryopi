@@ -1,0 +1,29 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const { sequelize } = require('./models');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const costumerRoutes = require('./routes/costumerRoutes');
+const levelRoutes = require('./routes/levelRoutes');
+const productRoutes = require('./routes/productRoutes');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
+
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/costumers', costumerRoutes);
+app.use('/levels', levelRoutes);
+app.use('/products', productRoutes);
+
+app.listen(PORT, async () => {
+  try {
+    await sequelize.authenticate();
+    console.log(`Server is running on port ${PORT}`);
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+});
