@@ -1,4 +1,4 @@
-const { Costumer } = require('../models');
+const { Costumer,Product } = require('../models');
 
 const addCostumer = async (req, res) => {
   try {
@@ -72,15 +72,19 @@ const getCostumersByUpline = async (req, res) => {
 
 const getCostumers = async (req, res) => {
   try {
-    const customers = await Customer.findAll({
-      include: [{
-        model: Product,
-        attributes: ['name', 'price'],
-      }],
+    const customers = await Costumer.findAll({
+      include: [
+        {
+          model: Product,
+          as: 'product',
+          attributes: ['name', 'price'],
+        },
+      ],
     });
     res.json(customers);
   } catch (error) {
-    res.status(500).send(error);
+    console.error('Error fetching customers:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
