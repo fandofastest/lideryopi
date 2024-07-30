@@ -77,7 +77,7 @@ const getCostumers = async (req, res) => {
         {
           model: Product,
           as: 'product',
-          attributes: ['name', 'price'],
+          attributes: ['id','name', 'price'],
         },
       ],
     });
