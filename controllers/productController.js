@@ -28,6 +28,20 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+
+const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByPk(req.params.id);
+    if (!product) {
+      return res.status(404).send({ error: 'Product not found' });
+    }
+    await product.destroy();
+    res.send(product);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 const getProductById = async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);
@@ -40,4 +54,4 @@ const getProductById = async (req, res) => {
   }
 };
 
-module.exports = { addProduct,getAllProducts, getProductById };
+module.exports = { addProduct,deleteProduct,getAllProducts, getProductById };
