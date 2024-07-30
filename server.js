@@ -6,6 +6,8 @@ const userRoutes = require('./routes/userRoutes');
 const costumerRoutes = require('./routes/costumerRoutes');
 const levelRoutes = require('./routes/levelRoutes');
 const productRoutes = require('./routes/productRoutes');
+const path = require('path');
+
 require('dotenv').config();
 
 const app = express();
