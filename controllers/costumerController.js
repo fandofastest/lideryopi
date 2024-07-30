@@ -72,8 +72,13 @@ const getCostumersByUpline = async (req, res) => {
 
 const getCostumers = async (req, res) => {
   try {
-    const costumers = await Costumer.findAll();
-    res.send(costumers);
+    const customers = await Customer.findAll({
+      include: [{
+        model: Product,
+        attributes: ['name', 'price'],
+      }],
+    });
+    res.json(customers);
   } catch (error) {
     res.status(500).send(error);
   }
