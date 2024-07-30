@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/authMiddleware');
 const upload = require('../middleware/multerConfig');
-const { addCostumer, addImageToCostumer, deleteCostumer, getCostumerById, getCostumersByUpline, getCostumerByName, updateCostumer } = require('../controllers/costumerController');
+const { addCostumer,getCostumers, addImageToCostumer, deleteCostumer, getCostumerById, getCostumersByUpline, getCostumerByName, updateCostumer } = require('../controllers/costumerController');
 
 // Route to add customer without image
 router.post('/add', authenticate, addCostumer);
@@ -12,6 +12,7 @@ router.post('/addimage/:id', authenticate, upload.single('image'), addImageToCos
 
 router.delete('/delete/:id', authenticate, deleteCostumer);
 router.get('/getcostumer/:id', authenticate, getCostumerById);
+router.get('/getall/', authenticate, getCostumers);
 router.get('/getcostumerbyupline/:id_upline', authenticate, getCostumersByUpline);
 router.get('/getcostumerbyname/:name', authenticate, getCostumerByName);
 router.put('/update/:id', authenticate, updateCostumer);

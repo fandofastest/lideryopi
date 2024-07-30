@@ -70,6 +70,15 @@ const getCostumersByUpline = async (req, res) => {
   }
 };
 
+const getCostumers = async (req, res) => {
+  try {
+    const costumers = await Costumer.findAll();
+    res.send(costumers);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 const getCostumerByName = async (req, res) => {
   try {
     const costumer = await Costumer.findOne({ where: { name: req.params.name } });
@@ -109,4 +118,4 @@ const updateCostumer = async (req, res) => {
   }
 };
 
-module.exports = {addCostumer, addImageToCostumer, deleteCostumer, getCostumerById, getCostumersByUpline, getCostumerByName, updateCostumer };
+module.exports = {addCostumer,getCostumers, addImageToCostumer, deleteCostumer, getCostumerById, getCostumersByUpline, getCostumerByName, updateCostumer };
